@@ -36,9 +36,9 @@ fs.promises
 
 function solve(puzzles) {
   // Making graph
-  let graph = new Map();
+  let graph = [];
   for (let index = 0; index < puzzles.length; index++) {
-    graph.set(index, []);
+    graph[index] = [];
 
     const END = puzzles[index].slice(-2);
 
@@ -48,7 +48,7 @@ function solve(puzzles) {
       const START = puzzles[iterations].slice(0, 2);
 
       if (END === START) {
-        graph.get(index).push(iterations);
+        graph[index].push(iterations);
       }
     }
   }
@@ -62,7 +62,7 @@ function solve(puzzles) {
     path.push(currentIndex);
 
     let extended = false;
-    for (const next of graph.get(currentIndex)) {
+    for (const next of graph[currentIndex]) {
       if (!visited[next]) {
         dfs(next, path);
         extended = true;
@@ -79,7 +79,7 @@ function solve(puzzles) {
     visited[currentIndex] = false;
   };
 
-  // Run DFS
+  // Ruining DFS
   for (let index = 0; index < puzzles.length; index++) {
     dfs(index, []);
   }
